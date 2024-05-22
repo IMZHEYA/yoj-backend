@@ -39,12 +39,12 @@ public class QuestionUpdateRequest implements Serializable {
     /**
      * 判题用例（json 数组）
      */
-    private List<judgeCase> judgeCase;
+    private List<JudgeCase> judgeCase;
 
     /**
      * 判题配置（json 对象）
      */
-    private judgeConfig judgeConfig;
+    private JudgeConfig judgeConfig;
 
 
 

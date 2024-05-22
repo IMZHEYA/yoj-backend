@@ -6,7 +6,7 @@ import lombok.Data;
  * 判题配置
  */
 @Data
-public class judgeConfig {
+public class JudgeConfig {
 
 
     private Long timeLimit;
