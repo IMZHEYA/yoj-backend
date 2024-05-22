@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yupi.yoj.mapper.QuestionMapper">
+<mapper namespace="generator.mapper.QuestionMapper">
 
     <resultMap id="BaseResultMap" type="com.yupi.yoj.model.entity.Question">
             <id property="id" column="id" jdbcType="BIGINT"/>
