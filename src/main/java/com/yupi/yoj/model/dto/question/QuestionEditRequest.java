@@ -16,6 +16,11 @@ public class QuestionEditRequest implements Serializable {
 
 
     /**
+     * id
+     */
+    private Long id;
+
+    /**
      * 标题
      */
     private String title;
