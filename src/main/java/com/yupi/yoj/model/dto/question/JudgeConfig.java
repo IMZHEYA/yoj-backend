@@ -13,4 +13,6 @@ public class JudgeConfig {
 
 
     private Long memoryLimit;
+
+    private Long stackLimit;
 }
