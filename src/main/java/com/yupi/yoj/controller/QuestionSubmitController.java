@@ -68,7 +68,6 @@ public class QuestionSubmitController {
      * @return
      */
     @PostMapping("/list/page")
-    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
                                                                  HttpServletRequest request) {
         long current = questionSubmitQueryRequest.getCurrent();
