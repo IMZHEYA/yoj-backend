@@ -157,7 +157,7 @@ public class QuestionController {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         User loginUser = userService.getLoginUser(request);
-        if(!loginUser.getId().equals(id) && userService.isAdmin(loginUser)){
+            if(!loginUser.getId().equals(question.getUserId()) && userService.isAdmin(loginUser)){
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
         return ResultUtils.success(question);
