@@ -19,7 +19,7 @@ public class CodeSandboxFactory {
                 return new ExampleCodeSandbox();
             case "remote":
                 return new RemoteCodeSandbox();
-            case "Third":
+            case "ThirdParty":
                 return new ThirdPartyCodeSandbox();
             default:
                 return new ExampleCodeSandbox();
