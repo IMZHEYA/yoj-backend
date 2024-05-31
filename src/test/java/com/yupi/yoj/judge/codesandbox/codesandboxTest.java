@@ -45,4 +45,17 @@ class codesandboxTest {
         Assertions.assertNotNull(executecodeResponse);
     }
 
+    @Test
+    void executeCodeByProxy(){
+        CodeSandbox codesandbox = CodeSandboxFactory.newInstance(type);
+        codesandbox = new CodeSandboxProxy(codesandbox);
+        String code = "int main(){}";
+        String language = QuestionSubmitLanguageEnum.JAVA.getValue();
+        List<String> inputList = Arrays.asList("1 2","3 4");
+        ExecutecodeCodeRequest executecodeCodeRequest = ExecutecodeCodeRequest.builder().code(code).language(language).inputList(inputList).build();
+
+        ExecutecodeResponse executecodeResponse = codesandbox.executeCode(executecodeCodeRequest);
+        Assertions.assertNotNull(executecodeResponse);
+    }
+
 }
