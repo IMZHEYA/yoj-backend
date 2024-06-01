@@ -18,7 +18,7 @@ class codesandboxTest {
 
 
     @Value("${codeSandbox.type:example}")
-    String type;
+    private String type;
 
     @Test
     void executeCode(){
