@@ -1,5 +1,6 @@
 package com.yupi.yoj.judge;
 
+import com.yupi.yoj.model.entity.QuestionSubmit;
 import com.yupi.yoj.model.vo.QuestionSubmitVO;
 
 public interface JudgeService {
@@ -10,5 +11,5 @@ public interface JudgeService {
      * @param questionSubmitId
      * @return
      */
-    QuestionSubmitVO doJudge(long questionSubmitId);
+    QuestionSubmit doJudge(long questionSubmitId);
 }
