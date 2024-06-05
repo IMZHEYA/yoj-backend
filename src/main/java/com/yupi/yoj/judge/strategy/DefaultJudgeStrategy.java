@@ -1,10 +1,9 @@
 package com.yupi.yoj.judge.strategy;
 
 import cn.hutool.json.JSONUtil;
-import com.yupi.yoj.judge.codesandbox.model.ExecutecodeResponse;
 import com.yupi.yoj.model.dto.question.JudgeCase;
 import com.yupi.yoj.model.dto.question.JudgeConfig;
-import com.yupi.yoj.model.dto.questionSubmit.JudgeInfo;
+import com.yupi.yoj.judge.codesandbox.model.JudgeInfo;
 import com.yupi.yoj.model.entity.Question;
 import com.yupi.yoj.model.entity.QuestionSubmit;
 import com.yupi.yoj.model.enums.JudgeInfoMessageEnum;

@@ -1,18 +1,13 @@
 package com.yupi.yoj.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.yupi.yoj.model.dto.question.JudgeConfig;
-import com.yupi.yoj.model.dto.questionSubmit.JudgeInfo;
-import com.yupi.yoj.model.entity.Question;
+import com.yupi.yoj.judge.codesandbox.model.JudgeInfo;
 import com.yupi.yoj.model.entity.QuestionSubmit;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 题目视图
