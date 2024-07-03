@@ -105,4 +105,4 @@ knife4j:
           - com.yupi.yoj.controller
 #代码沙箱配置
 codeSandebox:
-  type: example
+  type: remote
