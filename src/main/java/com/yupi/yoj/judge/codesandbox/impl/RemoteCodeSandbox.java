@@ -13,11 +13,16 @@ import com.yupi.yoj.judge.codesandbox.model.ExecutecodeResponse;
  * 远程代码沙箱：自己开发的沙箱
  */
 public class RemoteCodeSandbox implements CodeSandbox {
+    //鉴权请求头
+    public static final String AUTH_REQUEST_HEADER = "auth";
+    //密钥
+    public static final String AUTH_REQUEST_SECRET = "secretKey";
     @Override
     public ExecutecodeResponse executeCode(ExecutecodeCodeRequest excodeCodeRequest) {
         String url = "http://localhost:8090/executeCode";
         String jsonStr = JSONUtil.toJsonStr(excodeCodeRequest);
         String responseStr = HttpUtil.createPost(url)
+                .header(AUTH_REQUEST_HEADER,AUTH_REQUEST_SECRET)   //带上请求头，
                 .body(jsonStr)
                 .execute()
                 .body();
