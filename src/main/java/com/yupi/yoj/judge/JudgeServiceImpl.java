@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Service
 public class JudgeServiceImpl implements JudgeService {
 
-    @Value("${codeSandbox.type:example}")
+    @Value("${codeSandbox.type}")
     private String type;
 
     @Resource

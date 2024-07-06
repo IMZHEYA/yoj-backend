@@ -10,17 +10,18 @@ import com.yupi.yoj.model.enums.JudgeInfoMessageEnum;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class JavaLanguageJudgeStrategy implements JudgeStrategy {
     @Override
     public JudgeInfo doJudge(JudgeContext judgeContext) {
-        //        1、先判断沙箱执行的结果输出数量是否和预期输出数量相等
+        // 1、先判断沙箱执行的结果输出数量是否和预期输出数量相等
 //        2、依次判断每一项输出和预期输出结果是否相等
 //        3、判题题目的限制是否符合要求
 //        4、可能还有其他的异常情况
         JudgeInfo judgeInfo = judgeContext.getJudgeInfo();
-        Long time = judgeInfo.getTime();
-        Long memory = judgeInfo.getMemory();
+        Long time = Optional.ofNullable(judgeInfo.getTime()).orElse(0L);
+        Long memory = Optional.ofNullable(judgeInfo.getMemory()).orElse(0L);
         List<String> inputList = judgeContext.getInputList();
         List<String> outputList = judgeContext.getOutputList();
         List<JudgeCase> judgeCaseList = judgeContext.getJudgeCaseList();

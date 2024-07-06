@@ -17,10 +17,7 @@ import com.yupi.yoj.model.vo.QuestionSubmitVO;
 import com.yupi.yoj.service.QuestionSubmitService;
 import com.yupi.yoj.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -81,4 +78,22 @@ public class QuestionSubmitController {
         return ResultUtils.success(questionSubmitVOPage);
     }
 
+    /**
+     * 根据ID获取提交信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/question_submit/get/id")
+    public BaseResponse<QuestionSubmitVO> getJudgeResult(Long id,HttpServletRequest request){
+        if(id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        QuestionSubmit questionSubmit = questionSubmitService.getById(id);
+        if(questionSubmit == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR,"提交记录不存在");
+        }
+        User loginUser = userService.getLoginUser(request);
+        QuestionSubmitVO questionSubmitVO = questionSubmitService.getQuestionSubmitVO(questionSubmit, loginUser);
+        return ResultUtils.success(questionSubmitVO);
+    }
 }
