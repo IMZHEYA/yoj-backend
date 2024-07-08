@@ -83,7 +83,7 @@ public class QuestionSubmitController {
      * @param id
      * @return
      */
-    @GetMapping("/question_submit/get/id")
+    @GetMapping("/get/vo")
     public BaseResponse<QuestionSubmitVO> getJudgeResult(Long id,HttpServletRequest request){
         if(id <= 0){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);

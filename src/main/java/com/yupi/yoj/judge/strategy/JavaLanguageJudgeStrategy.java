@@ -31,11 +31,21 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         JudgeInfo judgeInfoResponse = new JudgeInfo();
         judgeInfoResponse.setTime(time);
         judgeInfoResponse.setMemory(memory);
+        judgeInfoResponse.setTotalNum(inputList.size());
+        int passNum = 0;
+        for(int i = 0; i < outputList.size();i ++){
+            if(inputList.get(i).equals(outputList.get(i))){
+                passNum ++;
+            }
+        }
+        judgeInfoResponse.setPassNum(passNum);
+        // 输出用例与输入用例不匹配
         if(inputList.size() != outputList.size()){
             judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
             judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
             return judgeInfoResponse;
         }
+        //根据沙箱执行结果设置题目状态和信息
         for(int i = 0; i < outputList.size();i ++){
             if(!Objects.equals(outputList.get(i), inputList.get(i))){
                 judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
@@ -43,6 +53,7 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
                 return judgeInfoResponse;
             }
         }
+        judgeInfoResponse.setPassNum(outputList.size());
         //判断题目限制是否符合要求
         String judgeConfigStr = question.getJudgeConfig();
         JudgeConfig judgeConfig = JSONUtil.toBean(judgeConfigStr, JudgeConfig.class);
