@@ -1,16 +1,12 @@
 package com.yupi.yoj.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yupi.yoj.annotation.AuthCheck;
 import com.yupi.yoj.common.BaseResponse;
 import com.yupi.yoj.common.ErrorCode;
 import com.yupi.yoj.common.ResultUtils;
-import com.yupi.yoj.constant.UserConstant;
 import com.yupi.yoj.exception.BusinessException;
-import com.yupi.yoj.model.dto.question.QuestionQueryRequest;
 import com.yupi.yoj.model.dto.questionSubmit.QuestionSubmitAddRequest;
 import com.yupi.yoj.model.dto.questionSubmit.QuestionSubmitQueryRequest;
-import com.yupi.yoj.model.entity.Question;
 import com.yupi.yoj.model.entity.QuestionSubmit;
 import com.yupi.yoj.model.entity.User;
 import com.yupi.yoj.model.vo.QuestionSubmitVO;
@@ -49,7 +45,6 @@ public class QuestionSubmitController {
         if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 登录才能点赞
         final User loginUser = userService.getLoginUser(request);
         long questionId = questionSubmitAddRequest.getQuestionId();
         Long result = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);

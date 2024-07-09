@@ -100,11 +100,11 @@ public class QuestionSubmitVO implements Serializable {
         if (questionSubmit == null) {
             return null;
         }
-        QuestionSubmitVO questionVO = new QuestionSubmitVO();
-        BeanUtils.copyProperties(questionSubmit, questionVO);
+        QuestionSubmitVO questionSubmitVO = new QuestionSubmitVO();
+        BeanUtils.copyProperties(questionSubmit, questionSubmitVO);
         String info = questionSubmit.getJudgeInfo();
-        questionVO.setJudgeInfo(JSONUtil.toBean(info,JudgeInfo.class));
-        return questionVO;
+        questionSubmitVO.setJudgeInfo(JSONUtil.toBean(info,JudgeInfo.class));
+        return questionSubmitVO;
     }
 
     private static final long serialVersionUID = 1L;

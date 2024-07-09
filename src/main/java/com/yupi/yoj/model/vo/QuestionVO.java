@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.yupi.yoj.model.dto.question.CodeTemplate;
 import com.yupi.yoj.model.dto.question.JudgeCase;
 import com.yupi.yoj.model.dto.question.JudgeConfig;
 import com.yupi.yoj.model.entity.Question;
@@ -85,6 +86,11 @@ public class QuestionVO implements Serializable {
      * 用户信息
      */
     private UserVO userVO;
+
+    /**
+     * 代码模版
+     */
+    private CodeTemplate codeTemplate;
     /**
      * 包装类转对象,属性JAVA对象转为字符串
      *

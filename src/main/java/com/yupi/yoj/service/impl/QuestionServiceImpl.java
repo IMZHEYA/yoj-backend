@@ -4,11 +4,13 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.gson.Gson;
 import com.yupi.yoj.common.ErrorCode;
 import com.yupi.yoj.constant.CommonConstant;
 import com.yupi.yoj.exception.BusinessException;
 import com.yupi.yoj.exception.ThrowUtils;
 import com.yupi.yoj.mapper.QuestionMapper;
+import com.yupi.yoj.model.dto.question.CodeTemplate;
 import com.yupi.yoj.model.dto.question.QuestionQueryRequest;
 import com.yupi.yoj.model.entity.Question;
 import com.yupi.yoj.model.entity.User;
@@ -23,6 +25,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -137,6 +141,21 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         }
         UserVO userVO = userService.getUserVO(user);
         questionVO.setUserVO(userVO);
+        CodeTemplate codeTemplate = new CodeTemplate();
+        //从文件中读取，获取代码模版
+        Gson gson = new Gson();
+        FileReader reader = null;
+        try {
+            reader = new FileReader("D:\\project\\yoj-backend\\src\\main\\resources\\codeTemplate.json");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Map<String,String> codeMap = gson.fromJson(reader, Map.class);
+        codeTemplate.setJava(codeMap.get("java"));
+        codeTemplate.setPython(codeMap.get("python"));
+        codeTemplate.setCpp(codeMap.get("cpp"));
+        codeTemplate.setC(codeMap.get("c"));
+        questionVO.setCodeTemplate(codeTemplate);
         return questionVO;
     }
 

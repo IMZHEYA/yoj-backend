@@ -70,6 +70,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         if (languageEnum == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "编程语言错误");
         }
+
         // 判断实体是否存在，根据类别获取实体
         Long questionId = questionSubmitAddRequest.getQuestionId();
         Question question = questionService.getById(questionId);
@@ -135,6 +136,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     @Override
     public QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit, User loginUser) {
         QuestionSubmitVO questionSubmitVO = QuestionSubmitVO.objToVo(questionSubmit);
+        QuestionVO questionVO = QuestionVO.objToVo(questionService.getById(questionSubmit.getQuestionId()));
+        questionSubmitVO.setQuestionVO(questionVO);
         long userId = loginUser.getId();
         //不是提交者且不是管理员，不允许看别人的代码
         if (userId != questionSubmit.getUserId() && !userService.isAdmin(loginUser)) {
