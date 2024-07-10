@@ -1,14 +1,18 @@
 package com.yupi.yoj.judge.codesandbox;
 
+import com.yupi.yoj.judge.codesandbox.impl.RemoteCodeSandbox;
 import com.yupi.yoj.judge.codesandbox.model.ExecutecodeCodeRequest;
 import com.yupi.yoj.judge.codesandbox.model.ExecutecodeResponse;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.annotation.Resource;
 
 @Slf4j
 public class CodeSandboxProxy implements CodeSandbox{
 
 
     private final  CodeSandbox codeSandbox;
+
 
     public CodeSandboxProxy(CodeSandbox codeSandbox) {
         this.codeSandbox = codeSandbox;

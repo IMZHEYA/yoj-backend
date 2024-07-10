@@ -9,6 +9,7 @@ import com.yupi.yoj.judge.codesandbox.CodeSandboxProxy;
 import com.yupi.yoj.judge.codesandbox.model.ExecutecodeCodeRequest;
 import com.yupi.yoj.judge.codesandbox.model.ExecutecodeResponse;
 import com.yupi.yoj.judge.strategy.DefaultJudgeStrategy;
+import com.yupi.yoj.judge.strategy.JavaLanguageJudgeStrategy;
 import com.yupi.yoj.judge.strategy.JudgeContext;
 import com.yupi.yoj.judge.strategy.JudgeStrategy;
 import com.yupi.yoj.model.dto.question.JudgeCase;
@@ -80,7 +81,6 @@ public class JudgeServiceImpl implements JudgeService {
 //        5）根据沙箱的执行结果，设置题目的判题状态和信息
         ExecutecodeResponse executecodeResponse = codesandbox.executeCode(executecodeCodeRequest);
         List<String> outputList = executecodeResponse.getOutputList();
-        JudgeStrategy judgeStrategy = new DefaultJudgeStrategy();
         JudgeContext judgeContext = new JudgeContext();
         judgeContext.setJudgeInfo(executecodeResponse.getJudgeInfo());
         judgeContext.setInputList(inputList);

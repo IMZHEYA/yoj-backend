@@ -19,6 +19,8 @@ public class RemoteCodeSandbox implements CodeSandbox {
     public static final String AUTH_REQUEST_SECRET = "secretKey";
     @Override
     public ExecutecodeResponse executeCode(ExecutecodeCodeRequest excodeCodeRequest) {
+//        String url = "http://localhost:8090/executeCode";
+        //http://localhost:8090/executeCode
         String url = "http://localhost:8090/executeCode";
         String jsonStr = JSONUtil.toJsonStr(excodeCodeRequest);
         String responseStr = HttpUtil.createPost(url)

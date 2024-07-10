@@ -33,8 +33,11 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         judgeInfoResponse.setMemory(memory);
         judgeInfoResponse.setTotalNum(inputList.size());
         int passNum = 0;
-        for(int i = 0; i < outputList.size();i ++){
-            if(inputList.get(i).equals(outputList.get(i))){
+        for(int i = 0; i < judgeCaseList.size(); i ++){
+            JudgeCase judgeCase = judgeCaseList.get(i);
+            String output = judgeCase.getOutput();
+            String s = outputList.get(i);
+            if(judgeCase.getOutput().equals(outputList.get(i))){
                 passNum ++;
             }
         }
@@ -43,13 +46,16 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         if(inputList.size() != outputList.size()){
             judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
             judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
+//            judgeInfoResponse.setPassNum(0);
             return judgeInfoResponse;
         }
         //根据沙箱执行结果设置题目状态和信息
-        for(int i = 0; i < outputList.size();i ++){
-            if(!Objects.equals(outputList.get(i), inputList.get(i))){
+        for(int i = 0; i < judgeCaseList.size();i ++){
+            JudgeCase judgeCase = judgeCaseList.get(i);
+            if(!Objects.equals(outputList.get(i), judgeCase.getOutput())){
                 judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
                 judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
+//                judgeInfoResponse.setPassNum(i);
                 return judgeInfoResponse;
             }
         }
@@ -66,7 +72,7 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
             judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
             return judgeInfoResponse;
         }
-        if(memory - JAVA_TIME_COST > needmemoryLimit){
+        if(memory  > needmemoryLimit){
             judgeInfoMessageEnum = JudgeInfoMessageEnum.MEMORY_LIMIT_EXCEEDED;
             judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
             return judgeInfoResponse;
