@@ -1,6 +1,8 @@
 package com.yupi.yoj.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -31,13 +33,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* @author 13425
-* @description 针对表【question(题目)】的数据库操作Service实现
-* @createDate 2024-05-22 18:55:53
-*/
+ * @author 13425
+ * @description 针对表【question(题目)】的数据库操作Service实现
+ * @createDate 2024-05-22 18:55:53
+ */
 @Service
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
-    implements QuestionService{
+        implements QuestionService {
 
 
     @Resource
@@ -45,6 +47,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
     /**
      * 校验参数方法
+     *
      * @param question
      * @param add
      */
@@ -124,7 +127,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     }
 
     /**
-     *
      * @param question
      * @param request
      * @return
@@ -140,22 +142,13 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
             user = userService.getById(userId);
         }
         UserVO userVO = userService.getUserVO(user);
-        questionVO.setUserVO(userVO);
         CodeTemplate codeTemplate = new CodeTemplate();
         //从文件中读取，获取代码模版
         Gson gson = new Gson();
-        FileReader reader = null;
-        try {
-            reader = new FileReader("D:\\project\\yoj-backend\\src\\main\\resources\\codeTemplate.json");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        Map<String,String> codeMap = gson.fromJson(reader, Map.class);
-        codeTemplate.setJava(codeMap.get("java"));
-        codeTemplate.setPython(codeMap.get("python"));
-        codeTemplate.setCpp(codeMap.get("cpp"));
-        codeTemplate.setC(codeMap.get("c"));
+        String codeTemplateStr = ResourceUtil.readUtf8Str("codeTemplate.json");
+        codeTemplate = JSONUtil.toBean(codeTemplateStr, CodeTemplate.class);
         questionVO.setCodeTemplate(codeTemplate);
+        questionVO.setUserVO(userVO);
         return questionVO;
     }
 

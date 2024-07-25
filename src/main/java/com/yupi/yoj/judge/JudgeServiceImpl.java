@@ -1,6 +1,7 @@
 package com.yupi.yoj.judge;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yupi.yoj.common.ErrorCode;
 import com.yupi.yoj.exception.BusinessException;
 import com.yupi.yoj.judge.codesandbox.CodeSandbox;
@@ -16,6 +17,7 @@ import com.yupi.yoj.model.dto.question.JudgeCase;
 import com.yupi.yoj.judge.codesandbox.model.JudgeInfo;
 import com.yupi.yoj.model.entity.Question;
 import com.yupi.yoj.model.entity.QuestionSubmit;
+import com.yupi.yoj.model.enums.JudgeInfoMessageEnum;
 import com.yupi.yoj.model.enums.QuestionSubmitStatusEnum;
 import com.yupi.yoj.service.QuestionService;
 import com.yupi.yoj.service.QuestionSubmitService;
@@ -97,6 +99,18 @@ public class JudgeServiceImpl implements JudgeService {
         save = questionSubmitService.updateById(questionSubmitUpdate);
         if(!save){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR,"题目状态更新错误");
+        }
+        //修改数据库题目全部提交数目
+        Integer submitNum = question.getSubmitNum();
+        question.setSubmitNum(submitNum + 1);
+        if(judgeInfo.getMessage().equals("通过")){
+            //更新数据库通过数目
+            Integer acceptedNum = question.getAcceptedNum();
+            question.setAcceptedNum(acceptedNum + 1);
+        }
+        boolean b = questionService.updateById(question);
+        if(!b){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"题目信息更新错误");
         }
         QuestionSubmit questionSubmitResult = questionSubmitService.getById(questionId);
         return questionSubmitResult;
