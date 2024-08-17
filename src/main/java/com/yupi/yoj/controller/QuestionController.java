@@ -67,7 +67,7 @@ public class QuestionController {
         if(judgeConfig != null){
             question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
         }
-        questionService.validQuestion(question, true);
+        questionService.validQuestion(question, false);
         User loginUser = userService.getLoginUser(request);
         question.setUserId(loginUser.getId());
         question.setFavourNum(0);
